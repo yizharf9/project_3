@@ -1,28 +1,44 @@
-import {React,useState} from "react";
-import Users from "../users/Users";
-import { Router, Route, Routes, useSearchParams } from "react-router-dom";
-import NewUser from "../users/NewUser";
+import { React, useState, useEffect } from "react";
+import { Outlet, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Greeting from "./greeting";
 
 export default function Main() {
-    const [User, setUser] = useState({})
 
-    const Login = ({Username,Password}) => { 
-        
-    }
+    const [User, setUser] = useState({});
+    let n = useNavigate();
+    let {id : userid} = useParams()
+    
+    const navigate = (e) => {
+        n(e.target.name);
+    };
 
+    useEffect(() => {}, []);
     return (
         <div>
             <div className="top-row">
-                <input type="button" value="users" />
-                <input type="button" value="main page" />
-                <input type="button" value="  " />
+                <input
+                    type="button"
+                    name="/"
+                    value="log-out"
+                    onClick={navigate}
+                />
+                <input
+                    type="button"
+                    name="users"
+                    value="users"
+                    onClick={navigate}
+                />
+                <input
+                    type="button"
+                    name="movies"
+                    value="movies"
+                    onClick={navigate}
+                />
             </div>
+            <Greeting userid={userid} />
             <h2>Main</h2>
-            <br />
-            <Routes>
-                <Route path="users" element={<Users />}></Route>
-                <Route path="new_user" element={<NewUser />}></Route>
-            </Routes>
+            <Outlet />
         </div>
     );
 }
