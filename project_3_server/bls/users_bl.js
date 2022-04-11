@@ -1,5 +1,5 @@
 const User = require("../models/user_model");
-//#region 
+//#region
 const getUsers = () =>
     new Promise((resolve, reject) => {
         User.find({}, (err, data) => {
@@ -33,13 +33,14 @@ const getUser_byName = (_Name) =>
         });
     });
 
-const login = ({_Username,_Password}) =>
+const login = ({ Username: _Username, Password: _Password }) =>
     new Promise((resolve, reject) => {
-        User.find({ Username:_Username,Password:_Password}, (err, data) => {
+        // console.log(_Username,_Password);
+        User.findOne({ Username: _Username }, (err, data) => {
             if (err) {
-                reject('invalid input!');
+                reject("invalid input!");
             } else {
-                resolve(data);
+                resolve(data.Password == _Password ? data: "invalid input!");
             }
         });
     });
@@ -87,5 +88,5 @@ module.exports = {
     addUser,
     uptUser,
     delUser,
-    login
+    login,
 };

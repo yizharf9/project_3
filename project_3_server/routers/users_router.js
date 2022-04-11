@@ -15,14 +15,12 @@ Router.route("/:id").get(async (req, resp) => {
 Router.route("/name/:id").get(async (req, resp) => {
     let User = await bl.getUser_byName(req.params.id);
     return resp.json(User);
-
 });
 
-Router.route("/login/").get(async (req, resp) => {
-    let User = await bl.getUser_byName(req.params.id);
-    return resp.json(User);
+Router.route("/login").post(async (req, resp) => {
+    let status = await bl.login(req.body);
+    return resp.json(status);
 });
-
 
 Router.route("/").post(async (req, resp) => {
     let status = await bl.addUser(req.body);
