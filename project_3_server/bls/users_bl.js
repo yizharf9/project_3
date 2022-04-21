@@ -36,11 +36,12 @@ const getUser_byName = (_Name) =>
 const login = ({ Username: _Username, Password: _Password }) =>
     new Promise((resolve, reject) => {
         // console.log(_Username,_Password);
-        User.findOne({ Username: _Username }, (err, data) => {
+        User.find({ Username: _Username }, (err, data) => {
             if (err) {
-                reject("invalid input!");
+                reject("no such user in database!");
             } else {
-                resolve(data.Password == _Password ? data: "invalid input!");
+
+                resolve(data.length!=0&&data[0].Password == _Password ? data[0]: "input err!");
             }
         });
     });
