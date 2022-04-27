@@ -7,6 +7,8 @@
     border: solid rgb(0, 0, 168);
     border-radius: 10px;
     padding: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 .App {

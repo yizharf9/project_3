@@ -13,12 +13,17 @@ export default function Login() {
     };
 
     const login = async () => {
-        // console.log(Input);
-        let User = await utils.login(Input);
-        if (User.hasOwnProperty("Fullname")) {
-            n(`/main/${User.Fullname}/movies`);
-        }else{
-            alert(User)
+        if (Input.Username && Input.Password) {
+            console.log(Input);
+            let User = await utils.login(Input);
+            console.log(User);
+            if (!User.hasOwnProperty("Username")) {
+                alert("no such user registered in system!");
+            } else {
+                n(`/main/${User.Fullname}/movies`);
+            }
+        } else {
+            alert("make sure fields are filled before submition!");
         }
     };
 

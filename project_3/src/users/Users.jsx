@@ -7,10 +7,10 @@ export default function Users() {
         const _Users = async () => {
             let data = await utils.get_users();
             console.log(data);
-            setUsers(data);
+            // setUsers(data);
         };
         _Users()
-    }, []);
+    }, [Users]);
 
     let users_display = Users.map((user,i) => {
         return (

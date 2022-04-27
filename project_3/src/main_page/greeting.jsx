@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Greeting({userid}) {
-    // let fullname = "yizhar";
     return (
         <div
             style={{
