@@ -40,8 +40,11 @@ const login = ({ Username: _Username, Password: _Password }) =>
             if (err) {
                 reject("no such user in database!");
             } else {
-
-                resolve(data.length!=0&&data[0].Password == _Password ? data[0]: "input err!");
+                resolve(
+                    data.length != 0 && data[0].Password == _Password
+                        ? data[0]
+                        : "no such user in database!"
+                );
             }
         });
     });

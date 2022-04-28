@@ -11,10 +11,11 @@ app.use(cors());
 const users_router = require("./routers/users_router");
 const members_router = require("./routers/members_router");
 const movies_router = require("./routers/movies_router");
+const subs_router = require("./routers/subs_router");
 
 app.use("/api/users", users_router);
 app.use("/api/members", members_router);
 app.use("/api/movies", movies_router);
-app.use("/api/movies", movies_router);
+app.use("/api/subscriptions", subs_router);
 
 app.listen(8000);
