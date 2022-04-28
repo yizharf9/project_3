@@ -61,7 +61,7 @@ export default function NewMovie() {
             <input type="text" name="Image" onKeyUp={handle_input} />
             <br />
             Genres :{" "}
-            <select name="genres" id="" onChange={getPickedGenre}>
+            <select name="genres" id="" onClick={getPickedGenre}>
                 {genres_options}
             </select>
             <input

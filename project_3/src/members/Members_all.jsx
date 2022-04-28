@@ -26,7 +26,6 @@ export default function MembersAll() {
             return member.Fullname.startsWith(search_val)
         }));
     }
-    
 
     let Members_display = searched.map((member, i) => {
         return (

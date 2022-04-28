@@ -2,119 +2,55 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as utils from "../utils";
 
-export default function EditMovie() {
-    const styling = {};
+export default function NewMember() {
+    const styling = {
+        textAlign: "left",
+        position: "relative",
+        marginInline: "375px",
+    };
+
     const n = useNavigate();
-
-    let { movieid: movieID } = useParams();
     const [Input, setInput] = useState({});
-
-    const genre_list = utils.genres;
-    const [genres, setGenres] = useState([]);
-    const [genre, setGenre] = useState("");
+    const {memberid: memberID} = useParams()
 
     useEffect(() => {
-        utils.Movies.getMovie(movieID).then((movie) => {
-            setInput(movie);
-            setGenres([...movie.Genres]);
-            let _title = document.getElementById("_title");
-            _title.innerText = "edit movie : " + movie.Title;
-        });
-    }, [movieID]);
-
+        utils.Members.get_Member(memberID).then((member) => { 
+            setInput(member)
+        })
+        window.scrollTo(0, 0);
+    }, [])
+    
+    
     const handle_input = (e) => {
         let { value, name } = e.target;
         setInput({ ...Input, [name]: value });
+        // console.log(Input);
+        console.log(value);
     };
 
-    const getPickedGenre = (e) => {
-        setGenre(e.target.value);
-    };
-
-    const save = async (e) => {
-        setInput({ ...Input, Genres: [...genres] });
+    const upt_Member = async (e) => {
         console.log(Input);
-        // let status = await utils.upt_movie(Input);
-        // alert(status)
-        // n("../movies");
+        console.log(memberID);
+        await utils.Members.upt_Member(memberID,Input);
+        n("../all-members");
     };
-
-    let genres_options = genre_list.map((gen, i) => {
-        return <option key={i}>{gen}</option>;
-    });
-
-    let genres_dis = genres.map((gen, i) => {
-        return (
-            <li name="genres" key={i} value={gen}>
-                {gen}
-            </li>
-        );
-    });
 
     return (
-        <div style={styling}>
-            <h3 id="_title">edit movie : </h3>
-            <br />
-            Title :{" "}
-            <input
-                className="input"
-                type="text"
-                name="Title"
-                value={Input.Title}
-                onChange={handle_input}
-            />
-            <br />
-            Premiere :{" "}
-            <input
-                className="input"
-                type="date"
-                name="Premiere"
-                value={Input.Premiere}
-                onChange={handle_input}
-            />
-            <br />
-            image url :{" "}
-            <input
-                className="input"
-                type="text"
-                name="Image"
-                value={Input.Image}
-                onChange={handle_input}
-            />
-            <br />
-            Genres :{" "}
-            <select name="genres" id="" onChange={getPickedGenre}>
-                {genres_options}
-            </select>
-            <input
-                type="button"
-                value="add"
-                onClick={() => {
-                    setGenres([...genres, genre]);
-                    // console.log(Input.Genres);
-                    // console.log(genres);
-                }}
-            />
-            <br />
-            <input
-                type="button"
-                onClick={() => {
-                    setGenres([]);
-                }}
-                value={"clear genres"}
-            />
-            <br />
-            <div style={{ margin: "auto", width: "300px" }}>
-                <ul>{genres_dis}</ul>
+        <div style={{ alignContent: "center" }}>
+            <div style={styling}>
+                <h3>Add a new member!</h3>
+                <br />
+                Full Name :{" "}
+                <input type="text" name="Fullname" value={Input.Fullname} onChange={handle_input} />
+                <br />
+                Email :{" "}
+                <input type="text" name="Email" value={Input.Email} onChange={handle_input} />
+                <br />
+                City : <input type="text" name="City" value={Input.City} onChange={handle_input} />
+                <br />
+                <br />
             </div>
-            <br />
-            <input type="button" value="SAVE" onClick={save} />
-            <span> </span>
-            <input
-                type="button"
-                value="CANCEL"
-                onClick={() => n("../all-movies")}
-            />
+            <input type="button" value="SAVE" onClick={upt_Member} />
         </div>
     );
 }

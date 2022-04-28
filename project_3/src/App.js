@@ -4,8 +4,8 @@ import Login from "./main_page/Login";
 import Main from "./main_page/Main";
 import Members from "./members/Members";
 import MembersAll from "./members/Members_all";
-// import NewMember from "./movies/NewMember";
-// import EditMember from "./movies/EditMember";
+import NewMember from "./members/NewMember";
+import EditMember from "./members/EditMember";
 
 import Movies from "./movies/Movies";
 import MoviesAll from "./movies/Movies_all";
@@ -21,6 +21,11 @@ function App() {
                 <Route path="main/:id" element={<Main />}>
                     <Route path="members" element={<Members />}>
                         <Route path="all-members" element={<MembersAll />} />
+                        <Route path="add-member" element={<NewMember />} />
+                        <Route
+                            path="edit-member/:memberid"
+                            element={<EditMember />}
+                        />
                     </Route>
                     <Route path="movies" element={<Movies />}>
                         <Route path="all-movies" element={<MoviesAll />} />

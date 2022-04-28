@@ -15,11 +15,17 @@ export default function Main() {
             if (window.confirm(msg)) {
                 n(e.target.name);
             }
-        } 
+        }
     };
 
     return (
-        <div>
+        <div
+            style={{
+                backgroundColor: "rgb(27, 27, 96)",
+                color: "rgb(108, 108, 251)",
+                height:"16000px"
+            }}
+        >
             <div className="top-row">
                 <input
                     style={{
@@ -43,7 +49,6 @@ export default function Main() {
                 />
             </div>
             <Greeting userid={userid} />
-            <h2>Main</h2>
             <Outlet />
         </div>
     );

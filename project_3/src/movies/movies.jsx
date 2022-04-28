@@ -7,6 +7,7 @@ export default function Movies() {
     const n = useNavigate();
     return (
         <div>
+            <h2>Movies</h2>
             <input
                 type="button"
                 value="all movies"
@@ -21,7 +22,6 @@ export default function Movies() {
                     n("./add-movie");
                 }}
             />
-            <br />
             <br />
             <br />
             <div style={{ border: "solid black", marginInline: "100px" }}>

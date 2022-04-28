@@ -42,7 +42,7 @@ const login = async ({ Username: U, Password: P }) => {
 const Movies = {
     getMovies: async () => {
         let { data: movies } = await axios.get(`${movies_url}`);
-        console.log(movies);
+        // console.log(movies);
         return movies;
     },
 
@@ -71,7 +71,7 @@ const Movies = {
 const Members = {
     get_Members: async () => {
         let { data: Members } = await axios.get(`${members_url}`);
-        console.log(Members);
+        // console.log(Members);
         return Members;
     },
     get_Member: async (id) => {
@@ -106,6 +106,11 @@ const Subs = {
     },
     get_memberSubs: async (memberid) => {
         let { data: Subs } = await axios.get(`${subs_url}member/${memberid}`);
+        // console.log(Subs);
+        return Subs;
+    },
+    get_movieSubs: async (movieid) => {
+        let { data: Subs } = await axios.get(`${subs_url}movie/${movieid}`);
         // console.log(Subs);
         return Subs;
     },

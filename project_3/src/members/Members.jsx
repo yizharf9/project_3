@@ -1,14 +1,25 @@
 import { React, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function Members() {
+    const n = useNavigate();
     return (
         <div>
-            <h3>Members</h3>
-            <input type="button" value="all-members" />
-            <input type="button" value="add member" />
+            <h2>Members</h2>
+            <input
+                type="button"
+                value="all-members"
+                onClick={() => {
+                    n("all-members");
+                }}
+            />
+            <input
+                type="button"
+                value="add member"
+                onClick={() => n("add-member")}
+            />
             <br />
-            <Outlet/>
+            <Outlet />
         </div>
     );
 }
