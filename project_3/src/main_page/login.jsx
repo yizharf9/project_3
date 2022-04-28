@@ -20,7 +20,7 @@ export default function Login() {
             if (!User.hasOwnProperty("Username")) {
                 alert("no such user registered in system!");
             } else {
-                n(`/main/${User.Fullname}/movies`);
+                n(`/main/${User.Fullname}/movies/all-movies`);
             }
         } else {
             alert("make sure fields are filled before submition!");

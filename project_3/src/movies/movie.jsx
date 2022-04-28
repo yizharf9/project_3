@@ -11,7 +11,7 @@ export default function Movie({ data }) {
     };
 
     const delete_movie = () => {
-        utils.delete_movie(_id);
+        utils.Movies.delete_movie(_id);
         window.scrollTo(0, 0);
         window.location.reload();
     };

@@ -2,7 +2,11 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Login from "./main_page/Login";
 import Main from "./main_page/Main";
-import Users from "./users/Users";
+import Members from "./members/Members";
+import MembersAll from "./members/Members_all";
+// import NewMember from "./movies/NewMember";
+// import EditMember from "./movies/EditMember";
+
 import Movies from "./movies/Movies";
 import MoviesAll from "./movies/Movies_all";
 import NewMovie from "./movies/NewMovie";
@@ -15,17 +19,19 @@ function App() {
                 {/* <Route path="/" element={} /> */}
                 <Route path="/" element={<Login />} />
                 <Route path="main/:id" element={<Main />}>
-                    <Route path="users" element={<Users />} />
-                    <Route path="movies" element={<Movies />} >
+                    <Route path="members" element={<Members />}>
+                        <Route path="all-members" element={<MembersAll />} />
+                    </Route>
+                    <Route path="movies" element={<Movies />}>
                         <Route path="all-movies" element={<MoviesAll />} />
                         <Route path="add-movie" element={<NewMovie />} />
-                        <Route path="edit-movie/:movieid" element={<EditMovie />} />
+                        <Route
+                            path="edit-movie/:movieid"
+                            element={<EditMovie />}
+                        />
                     </Route>
                 </Route>
-                
-                
-                
-                
+
                 <Route
                     path="*"
                     element={

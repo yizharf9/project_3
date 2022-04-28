@@ -2,6 +2,8 @@ const axios = require("axios").default;
 
 const users_url = "http://localhost:8000/api/users/";
 const movies_url = "http://localhost:8000/api/movies/";
+const members_url = "http://localhost:8000/api/members/";
+const subs_url = "http://localhost:8000/api/subscriptions/";
 const genres = [
     "Drama",
     "Science-Fiction",
@@ -37,40 +39,88 @@ const login = async ({ Username: U, Password: P }) => {
     return data;
 };
 
-const getMovies = async () => {
-    let { data: movies } = await axios.get(`${movies_url}`);
-    console.log(movies);
-    return movies;
+const Movies = {
+    getMovies: async () => {
+        let { data: movies } = await axios.get(`${movies_url}`);
+        console.log(movies);
+        return movies;
+    },
+
+    getMovie: async (id) => {
+        let { data: movies } = await axios.get(`${movies_url}${id}`);
+        // console.log(movies);
+        return movies;
+    },
+
+    add_movie: async (newMovie) => {
+        let { data } = await axios.post(`${movies_url}`, newMovie);
+        return data;
+    },
+
+    upt_movie: async (id, newMovie) => {
+        let { data } = await axios.put(`${movies_url}${id}`, newMovie);
+        return data;
+    },
+
+    delete_movie: async (id) => {
+        let { data } = await axios.delete(`${movies_url}${id}`);
+        return data;
+    },
 };
 
-const getMovie = async (id) => {
-    let { data: movies } = await axios.get(`${movies_url}${id}`);
-    // console.log(movies);
-    return movies;
+const Members = {
+    get_Members: async () => {
+        let { data: Members } = await axios.get(`${members_url}`);
+        console.log(Members);
+        return Members;
+    },
+    get_Member: async (id) => {
+        let { data: Members } = await axios.get(`${members_url}${id}`);
+        // console.log(Members);
+        return Members;
+    },
+    add_Member: async (newMember) => {
+        let { data } = await axios.post(`${members_url}`, newMember);
+        return data;
+    },
+    upt_Member: async (id, newMember) => {
+        let { data } = await axios.put(`${members_url}${id}`, newMember);
+        return data;
+    },
+    delete_Member: async (id) => {
+        let { data } = await axios.delete(`${members_url}${id}`);
+        return data;
+    },
 };
 
-const add_movie = async (newMovie) => {
-    let { data } = await axios.post(`${movies_url}`, newMovie);
-    return data;
+const Subs = {
+    get_Subs: async () => {
+        let { data: Subs } = await axios.get(`${subs_url}`);
+        console.log(Subs);
+        return Subs;
+    },
+    get_Sub: async (id) => {
+        let { data: Subs } = await axios.get(`${subs_url}${id}`);
+        // console.log(Subs);
+        return Subs;
+    },
+    get_memberSubs: async (memberid) => {
+        let { data: Subs } = await axios.get(`${subs_url}member/${memberid}`);
+        // console.log(Subs);
+        return Subs;
+    },
+    add_Sub: async (newSub) => {
+        let { data } = await axios.post(`${subs_url}`, newSub);
+        return data;
+    },
+    upt_Sub: async (id, newSub) => {
+        let { data } = await axios.put(`${subs_url}${id}`, newSub);
+        return data;
+    },
+    delete_Sub: async (id) => {
+        let { data } = await axios.delete(`${subs_url}${id}`);
+        return data;
+    },
 };
 
-const upt_movie = async (id, newMovie) => {
-    let { data } = await axios.put(`${movies_url}${id}`, newMovie);
-    return data;
-};
-
-const delete_movie = async (id) => {
-    let { data } = await axios.delete(`${movies_url}${id}`);
-    return data;
-};
-
-export {
-    genres,
-    get_users,
-    login,
-    getMovies,
-    getMovie,
-    add_movie,
-    upt_movie,
-    delete_movie,
-};
+export { genres, get_users, login, Movies, Members, Subs };

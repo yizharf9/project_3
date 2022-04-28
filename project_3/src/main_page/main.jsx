@@ -11,7 +11,7 @@ export default function Main() {
         // navigating throw the app while confiming logging out
         if (e.target.value === "log-out") {
             let msg =
-                "you are about to log out of the system\n are you sure you want to do that?";
+                "you are about to log out of the system,\n are you sure you want to do that?";
             if (window.confirm(msg)) {
                 n(e.target.name);
             }
@@ -33,15 +33,13 @@ export default function Main() {
                 />
                 <input
                     type="button"
-                    name="movies"
                     value="Movies"
                     onClick={() => n("./movies/all-movies")}
                 />
                 <input
                     type="button"
-                    name="users"
-                    value="Users"
-                    onClick={() => n("users")}
+                    value="Members"
+                    onClick={() => n("./members/all-members")}
                 />
             </div>
             <Greeting userid={userid} />

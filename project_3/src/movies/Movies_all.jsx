@@ -10,7 +10,7 @@ export default function MoviesAll() {
 
     useEffect(() => {
         const _Movies = async () => {
-            let data = await utils.getMovies();
+            let data = await utils.Movies.getMovies();
             setMovies(data);
         };
         _Movies();
