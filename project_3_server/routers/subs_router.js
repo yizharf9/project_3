@@ -11,6 +11,10 @@ Router.route("/member/:id").get(async (req, resp) => {
     let Subs = await bl.get_memberSubs(req.params.id);
     return resp.json(Subs);
 });
+Router.route("/movie/:id").get(async (req, resp) => {
+    let Subs = await bl.get_movieSubs(req.params.id);
+    return resp.json(Subs);
+});
 
 Router.route("/:id").get(async (req, resp) => {
     let Sub = await bl.getSub(req.params.id);
@@ -29,6 +33,16 @@ Router.route("/:id").put(async (req, resp) => {
 
 Router.route("/:id").delete(async (req, resp) => {
     let status = await bl.delSub(req.params.id);
+    return resp.json(status);
+});
+
+Router.route("/member/:id").delete(async (req, resp) => {
+    let status = await bl.del_memberSubs(req.params.id);
+    return resp.json(status);
+});
+
+Router.route("/movie/:id").delete(async (req, resp) => {
+    let status = await bl.del_movieSubs(req.params.id);
     return resp.json(status);
 });
 

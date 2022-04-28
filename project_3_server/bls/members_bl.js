@@ -1,4 +1,5 @@
 const Member = require("../models/members_model");
+const subs_bl = require("./subs_bl");
 
 const getMembers = () =>
     new Promise((resolve, reject) => {
@@ -56,8 +57,9 @@ const uptMember = (id, obj) =>
         });
     });
 
-const delMember = (id) =>
-    new Promise((resolve, reject) => {
+const delMember = (id) => {
+    subs_bl.del_memberSubs(id);
+    return new Promise((resolve, reject) => {
         Member.findByIdAndDelete(id, (err, data) => {
             if (err) {
                 reject(err);
@@ -66,6 +68,7 @@ const delMember = (id) =>
             }
         });
     });
+};
 
 module.exports = {
     getMembers,

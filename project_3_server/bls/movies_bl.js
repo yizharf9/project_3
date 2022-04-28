@@ -1,4 +1,5 @@
 const Movie = require("../models/movies_model");
+const subs_bl = require("./subs_bl");
 
 const getMovies = () =>
     new Promise((resolve, reject) => {
@@ -56,8 +57,9 @@ const uptMovie = (id, obj) =>
         });
     });
 
-const delMovie = (id) =>
-    new Promise((resolve, reject) => {
+const delMovie = (id) => {
+    subs_bl.del_movieSubs(id);
+    return new Promise((resolve, reject) => {
         Movie.findByIdAndDelete(id, (err, data) => {
             if (err) {
                 reject(err);
@@ -66,6 +68,7 @@ const delMovie = (id) =>
             }
         });
     });
+};
 
 module.exports = {
     getMovies,
