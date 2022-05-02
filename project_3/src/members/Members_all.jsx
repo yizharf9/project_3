@@ -9,39 +9,21 @@ export default function MembersAll() {
     const {Name} = useParams()
     const [Members, setMembers] = useState([]);
     const [searched, setSearched] = useState([])
-    const [search_val, setSearch_val] = useState("")
 
     useEffect(() => {
-        if (Name !== undefined) {
-            setSearch_val(Name);
-            window.scrollTo(0, 0);
-        }
-        get_Members().then((members) => { 
-            console.log(members);
-            setMembers(members);
-            setSearched(members);
-            // search()
+        get_Members().then(members=>{
+            setMembers(members)
+            setSearched(members)
         })
-    }, [""]);
+    }, [""])
     
-    
-    useEffect(() => {
-        console.log(search_val);
-        search();
-    }, [search_val])
 
     useEffect(() => {
         if (Name !== undefined) {
-            setSearch_val(Name)
-            window.scrollTo(0, 0);
+            console.log(Name);
+            handle_search({ target: { value: Name } });
         }
-    }, [])
-
-    const search = (e) => {
-        setSearched(Members.filter((member) => { 
-            return member.Fullname.startsWith(search_val)
-        }));
-    }
+    }, [Members]);
 
     const handle_search = (e) => {
         let value = e.target.value;
@@ -49,8 +31,10 @@ export default function MembersAll() {
             setSearched(Members);
         } else {
             setSearched(
-                Members.filter((movie) =>
-                    movie.Title.toLowerCase().startsWith(value.toLowerCase())
+                Members.filter((member) =>
+                    member.Fullname.toLowerCase().startsWith(
+                        value.toLowerCase()
+                    )
                 )
             );
         }
@@ -68,8 +52,10 @@ export default function MembersAll() {
     return (
         <div>
             <br />
-            {/* search : <input type="text" onKeyUp={handle_search}/> */}
-            search : <input id="search_box" type="text" onKeyUp={(e)=>{setSearch_val(e.target.value)}}/>
+            search : <input type="text" onKeyUp={handle_search}/>
+            {/* search : <input id="search_box" type="text" 
+            // onKeyUp={}
+            /> */}
             <br />
             <br />
             {Members_display}
