@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from "react";
 import Movie from "./Movie";
 import * as utils from "../utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function MoviesAll() {
+    const { Name } = useParams();
     const [Movies, setMovies] = useState([]);
     const [Searched, setSearched] = useState(Movies);
     const n = useNavigate();
@@ -18,6 +19,10 @@ export default function MoviesAll() {
 
     useEffect(() => {
         setSearched(Movies);
+        if (Name !== undefined) {
+            console.log(Name);
+            handle_search({target:{value:Name}})
+        }
     }, [Movies]);
 
     const handle_search = (e) => {

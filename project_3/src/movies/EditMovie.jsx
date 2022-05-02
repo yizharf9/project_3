@@ -22,6 +22,11 @@ export default function EditMovie() {
         });
     }, [movieID]);
 
+    useEffect(() => {
+        setInput({ ...Input, Genres: [...genres] });
+    }, [genre,genres])
+    
+
     const handle_input = (e) => {
         let { value, name } = e.target;
         setInput({ ...Input, [name]: value });
@@ -32,11 +37,10 @@ export default function EditMovie() {
     };
 
     const save = async (e) => {
-        setInput({ ...Input, Genres: [...genres] });
         console.log(Input);
-        // let status = await utils.upt_movie(Input);
-        // alert(status)
-        // n("../movies");
+        let status = await utils.Movies.upt_movie(movieID,Input);
+        alert(status)
+        n("../all-movies");
     };
 
     let genres_options = genre_list.map((gen, i) => {
@@ -109,7 +113,7 @@ export default function EditMovie() {
             </div>
             <br />
             <input type="button" value="SAVE" onClick={save} />
-            <span> </span>
+            {"  "}
             <input
                 type="button"
                 value="CANCEL"

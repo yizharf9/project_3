@@ -10,7 +10,7 @@ export default function Members() {
                 type="button"
                 value="all-members"
                 onClick={() => {
-                    n("all-members");
+                    n("all-members/");
                 }}
             />
             <input

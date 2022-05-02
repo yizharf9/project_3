@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as utils from "../utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Movie({ data }) {
     const { _id, Title, Image, Premiere, Genres } = data;
@@ -11,27 +11,26 @@ export default function Movie({ data }) {
     useEffect(() => {
         utils.Members.get_Members().then((members) => {
             setMembers(members);
-        });
-        utils.Subs.get_movieSubs(_id).then((subs) => {
-            setSubs(subs);
+            utils.Subs.get_movieSubs(_id).then((subs) => {
+                setSubs(subs);
+            });
         });
     }, []);
 
     useEffect(() => {
         let filtered_subs = subs.map((sub) => sub.MemberID);
-        setMembers(
-            members
-                .filter((member) => {
-                    return filtered_subs.includes(member._id);
-                })
-                .map((member) => {
-                    member.Date = subs.find(
-                        (sub) => sub.MemberID === member._id
-                    ).Date;
-                    console.log(member.Date);
-                    return member;
-                })
-        );
+        let filtered_members = members.filter((member) => {
+            return filtered_subs.includes(member._id);
+        });
+        if (members.length !== 0) {
+            filtered_members = filtered_members.map((member) => {
+                member.Date = subs.find(
+                    (sub) => sub.MemberID === member._id
+                ).Date;
+                return member;
+            });
+        }
+        setMembers(filtered_members);
     }, [subs]);
 
     const edit_movie = () => {
@@ -51,7 +50,10 @@ export default function Movie({ data }) {
     let subs_dis = members.map((member, i) => {
         return (
             <li key={i}>
-                <span>{member.Fullname}</span>,
+                <Link to={`../../members/all-members/${member.Fullname}`}>
+                    {member.Fullname}
+                </Link>
+                ,
                 <br />
                 <span>{member.Date}</span>
             </li>
@@ -72,7 +74,7 @@ export default function Movie({ data }) {
                 </div>
                 <br />
                 <img src={Image} alt="" width={"30%"} height={"30%"} />
-                {subs_dis.length != 0 && (
+                {subs_dis.length !== 0 && (
                     <div>
                         <h3>watched by :</h3>
                         <ul style={{ border: "solid black" }}>{subs_dis}</ul>

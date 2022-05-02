@@ -91,7 +91,7 @@ export default function Member({ member }) {
     let watched_dis = watched.map((movie, i) => {
         return (
             <li key={i}>
-                <Link to={""}>{movie.Title}</Link>,
+                <Link to={`../../movies/all-movies/${movie.Title}`}>{movie.Title}</Link>,
                 <br />
                 <span>{movie.Date}</span>
             </li>

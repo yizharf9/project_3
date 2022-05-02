@@ -33,7 +33,7 @@ export default function NewMovie() {
         console.log(Input);
         let status = await utils.Movies.add_movie(Input)
         console.log(status)
-        n("../movies")
+        n("../all-movies")
     };
 
     let genres_options = genre_list.map((gen, i) => {

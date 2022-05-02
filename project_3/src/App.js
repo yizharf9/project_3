@@ -20,7 +20,8 @@ function App() {
                 <Route path="/" element={<Login />} />
                 <Route path="main/:id" element={<Main />}>
                     <Route path="members" element={<Members />}>
-                        <Route path="all-members" element={<MembersAll />} />
+                        <Route path="all-members/:Name" element={<MembersAll />} /> 
+                        <Route path="all-members/" element={<MembersAll />} /> 
                         <Route path="add-member" element={<NewMember />} />
                         <Route
                             path="edit-member/:memberid"
@@ -28,7 +29,11 @@ function App() {
                         />
                     </Route>
                     <Route path="movies" element={<Movies />}>
-                        <Route path="all-movies" element={<MoviesAll />} />
+                        <Route
+                            path="all-movies/:Name"
+                            element={<MoviesAll />}
+                        />
+                        <Route path="all-movies/" element={<MoviesAll />} />
                         <Route path="add-movie" element={<NewMovie />} />
                         <Route
                             path="edit-movie/:movieid"
